@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@700;900&display=swap');
+
+:root {
+    --fonte-titulo: 'Orbitron', sans-serif;
+    --fonte-texto: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+/* TEXTO PADRÃO DO SITE */
+body {
+    font-family: var(--fonte-texto);
+    font-weight: 400;
+}
+
+/* TÍTULOS */
+h1, h2, h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+}
+
+/* botões e campos não herdam a fonte sozinhos */
+button, input, textarea, select {
+    font-family: inherit;
+}
