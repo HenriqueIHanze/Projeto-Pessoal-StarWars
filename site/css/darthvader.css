@@ -1,0 +1,15 @@
+:root {
+    --fundo: #0a0a0c;
+    --fundo-alt: #0f0f13;
+    --fundo-escuro: #040405;
+    --cartao: #141418;
+    --borda: #2b2b33;
+    --texto: #f5f5f7;
+    --texto-2: #bdbdc7;
+    --texto-3: #a1a1ad;
+    --amarelo: #ffe81f;
+    --azul: #339eff;
+    --vermelho: #ff2b2b;
+    --fonte-titulo: "Orbitron", "Arial Black", sans-serif;
+    --fonte-texto: "Inter", system-ui, sans-serif;
+}

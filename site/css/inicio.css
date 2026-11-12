@@ -1,91 +1,15 @@
-body {
-    background-color: #09090b;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-header {
-    height: 92px;
-    border-bottom: 1px solid #25252a;
-}
-
-nav {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 80px;
-}
-
-/* LOGO */
-.titulo {
-    display: flex;
-    align-items: center;
-}
-
-
-.titulo h2 {
-    color: #eeeeee;
-    text-transform: uppercase;
-    font-size: 20px;
-    font-weight: bold;
-    margin: 0;
-}
-
-/* NAVEGAÇÃO */
-.navegacao {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-}
-
-.link a {
-    color: #c7c5cb;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-.link a:hover {
-    color: #ffe51f;
-    text-decoration: underline;
-    text-underline-offset: 5px;
-}
-
-/* BOTÕES */
-.cadastro {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-}
-
-.cadastro button {
-    height: 49px;
-    padding: 0 27px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* LOGIN */
-.cadastro div:first-child button {
-    background-color: transparent;
-    color: #ffe51f;
-    border: 2px solid #ffe51f;
-}
-
-/* CADASTRO */
-.cadastro div:last-child button {
-    background-color: #ffe51f;
-    color: #09090b;
-    border: 2px solid #ffe51f;
-}
-
-.cadastro div:last-child button:hover{
-    background-color: #09090b;
-    color: #c7c5cb;
-}
-
-.cadastro div:first-child button:hover{
-    background-color: #ffe51f;
-    color: #09090b;
+:root {
+    --fundo: #0a0a0c;
+    --fundo-alt: #0f0f13;
+    --fundo-escuro: #040405;
+    --cartao: #141418;
+    --borda: #2b2b33;
+    --texto: #f5f5f7;
+    --texto-2: #bdbdc7;
+    --texto-3: #a1a1ad;
+    --amarelo: #ffe81f;
+    --azul: #339eff;
+    --vermelho: #ff2b2b;
+    --fonte-titulo: "Orbitron", "Arial Black", sans-serif;
+    --fonte-texto: "Inter", system-ui, sans-serif;
 }
