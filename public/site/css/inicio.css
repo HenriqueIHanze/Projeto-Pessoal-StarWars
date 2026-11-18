@@ -1,0 +1,309 @@
+:root {
+    --fundo: #0a0a0c;
+    --fundo-alt: #0f0f13;
+    --fundo-escuro: #040405;
+    --cartao: #141418;
+    --borda: #2b2b33;
+    --texto: #f5f5f7;
+    --texto-2: #bdbdc7;
+    --texto-3: #a1a1ad;
+    --amarelo: #ffe81f;
+    --azul: #339eff;
+    --vermelho: #ff2b2b;
+    --fonte-titulo: "Orbitron", "Arial Black", sans-serif;
+    --fonte-texto: "Inter", system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: var(--fonte-texto);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+.tag {
+    color: var(--amarelo);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border: 2px solid var(--amarelo);
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.botaoPrimario {
+    background-color: var(--amarelo);
+    color: var(--fundo);
+    text-decoration: none;
+}
+
+.botaoContorno {
+    background-color: transparent;
+    color: var(--amarelo);
+    text-decoration: none;
+}
+
+/* hero */
+
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 64px;
+    padding: 96px 80px;
+    overflow: hidden;
+}
+
+.heroTexto {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    min-width: 0;
+}
+
+.heroTexto h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: 56px;
+    line-height: 1.12;
+    text-transform: uppercase;
+}
+
+.heroTexto h1 span {
+    display: block;
+    color: var(--amarelo);
+    text-shadow: 0 0 28px rgba(255, 232, 31, 0.35);
+    animation: falha 6s infinite;
+}
+
+.heroTexto p {
+    max-width: 640px;
+    color: var(--texto-2);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.heroBotoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+
+.linhaTempo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    gap: 16px;
+    width: 560px;
+    max-width: 100%;
+    padding: 32px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background-color: var(--cartao);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.filme {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--borda);
+    transition: transform 0.2s;
+}
+
+.filme:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.filmeNumero {
+    width: 52px;
+    color: var(--amarelo);
+    font-family: var(--fonte-titulo);
+    font-size: 22px;
+    font-weight: 700;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+.filme.prequel:hover .filmeNumero {
+    color: var(--azul);
+    text-shadow: 0 0 14px var(--azul);
+}
+
+.filme.original:hover .filmeNumero {
+    color: var(--vermelho);
+    text-shadow: 0 0 14px var(--vermelho);
+}
+
+.filmeInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.filmeInfo strong {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.filmeInfo small {
+    color: var(--texto-3);
+    font-size: 13px;
+}
+
+
+.secao {
+    position: relative;
+    padding: 96px 80px;
+    overflow: hidden;
+}
+
+.secao.fundoAlt {
+    background-color: var(--fundo-alt);
+}
+
+.secao::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    right: -280px;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.secaoTexto {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    max-width: 900px;
+}
+
+.secaoTexto h2 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.12;
+    text-transform: uppercase;
+}
+
+.secaoTexto p {
+    color: var(--texto-2);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.episodios {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+}
+
+.cartaoEpisodio {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 28px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    background-color: var(--cartao);
+}
+
+.cartaoEpisodio small {
+    color: var(--amarelo);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.cartaoEpisodio h3 {
+    font-family: var(--fonte-titulo);
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.2;
+}
+
+.cartaoEpisodio p {
+    color: var(--texto-2);
+    font-size: 15px;
+    line-height: 1.55;
+}
+
+.prequel .cartaoEpisodio:hover {
+    transform: translateY(-6px);
+    border-color: var(--azul);
+    box-shadow: 0 14px 40px rgba(51, 158, 255, 0.18);
+}
+
+.original .cartaoEpisodio:hover {
+    transform: translateY(-6px);
+    border-color: var(--vermelho);
+    box-shadow: 0 14px 40px rgba(255, 43, 43, 0.2);
+}
+
+
+.elo {
+    position: relative;
+    padding: 140px 80px;
+    background-color: var(--fundo-alt);
+    text-align: center;
+    overflow: hidden;
+}
+
+.eloConteudo {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.eloConteudo h2 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: 44px;
+    line-height: 1.12;
+    text-transform: uppercase;
+}
+
+.eloConteudo p {
+    max-width: 820px;
+    color: var(--texto-2);
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.eloBotoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+}
