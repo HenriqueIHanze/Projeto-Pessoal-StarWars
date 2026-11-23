@@ -91,3 +91,38 @@ nav {
 .linkLogCad button:hover {
     box-shadow: 0 0 20px rgba(255, 232, 31, 0.4);
 }
+
+/* USUÁRIO LOGADO */
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.perfil {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--texto-2);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--amarelo);
+    border-radius: 50%;
+    color: var(--amarelo);
+    font-family: var(--fonte-titulo);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.usuario .linkLogCad:last-child button {
+    background-color: transparent;
+    color: var(--amarelo);
+}
