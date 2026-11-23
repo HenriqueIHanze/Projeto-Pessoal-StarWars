@@ -1,0 +1,196 @@
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    overflow-x: hidden;
+}
+
+main {
+    display: flex;
+    min-height: calc(100vh - 92px);
+}
+
+/* - lado esquerdo, com a foto do Darth Vader - */
+
+.apresentacao {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 80px;
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(4, 4, 5, 0.96) 0%,
+            rgba(4, 4, 5, 0.7) 55%,
+            rgba(4, 4, 5, 0.25) 100%
+        ),
+        url("../img/Vader.jpeg");
+    background-size: cover;
+    background-position: right center;
+}
+
+.apresentacaoConteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 28px;
+    max-width: 640px;
+}
+
+.tag {
+    color: var(--vermelho);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.apresentacaoConteudo h1 {
+    font-family: var(--fonte-titulo);
+    font-weight: 900;
+    font-size: 48px;
+    line-height: 1.12;
+    text-transform: uppercase;
+}
+
+.barra {
+    width: 64px;
+    height: 4px;
+    border-radius: 2px;
+    background-color: var(--vermelho);
+}
+
+.apresentacaoConteudo p {
+    color: var(--texto-2);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.passos {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.passo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.numero {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--vermelho);
+    color: var(--texto);
+    font-family: var(--fonte-titulo);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* - lado direito, com o formulário - */
+
+.formulario {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 640px;
+    padding: 48px 64px;
+    background-color: var(--fundo-escuro);
+}
+
+.cartaoFormulario {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    padding: 40px;
+    border: 1px solid rgba(255, 43, 43, 0.4);
+    border-radius: 12px;
+    background-color: var(--cartao);
+}
+
+.formularioCabecalho {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formularioCabecalho h2 {
+    font-size: 26px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.formularioCabecalho p {
+    color: var(--texto-3);
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    color: var(--texto-2);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.campo input {
+    padding: 16px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    background-color: var(--fundo-escuro);
+    color: var(--texto);
+    font-size: 15px;
+}
+
+.campo input::placeholder {
+    color: var(--texto-3);
+}
+
+.campo input:focus {
+    outline: none;
+    border-color: var(--vermelho);
+}
+
+.botao {
+    padding: 14px 28px;
+    border: 2px solid var(--amarelo);
+    border-radius: 6px;
+    background-color: var(--amarelo);
+    color: var(--fundo);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.botao:hover {
+    background-color: transparent;
+    color: var(--amarelo);
+}
+
+.alternar {
+    color: var(--texto-3);
+    font-size: 15px;
+    text-align: center;
+}
+
+.alternar a {
+    color: var(--amarelo);
+    font-weight: 600;
+    text-decoration: underline;
+}
