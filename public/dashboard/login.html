@@ -1,11 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontes.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/autenticacao.css">
+    <title>Login | Anakin // Vader</title>
 </head>
+
 <body>
-    
+    <header>
+        <nav>
+            <div class="titulo">
+                <h2>Anakin <span>//</span> Vader</h2>
+            </div>
+            <div class="navegacao">
+                <div class="link">
+                    <a href="../site/inicio.html">Início</a>
+                </div>
+                <div class="link">
+                    <a href="../site/anakin.html">Anakin</a>
+                </div>
+                <div class="link">
+                    <a href="../site/darthvader.html">Darth Vader</a>
+                </div>
+                <div class="link">
+                    <a href="../site/sobremim.html">Sobre Mim</a>
+                </div>
+            </div>
+            <div class="cadastro">
+                <div class="linkLogCad">
+                    <button onclick="login()">Login</button>
+                </div>
+                <div class="linkLogCad">
+                    <button onclick="cadastrar()">Cadastro</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="apresentacao">
+            <div class="apresentacaoConteudo">
+                <span class="tag">Acesso à dashboard</span>
+                <h1>Entre para ver a dashboard</h1>
+                <div class="barra"></div>
+                <p>
+                    Faça login para acompanhar, em tempo real, os resultados do quiz sobre
+                    Anakin e Darth Vader.
+                </p>
+                <div class="passos">
+                    <div class="passo">
+                        <span class="numero">1</span>
+                        <span>Responda ao quiz sobre Anakin e Darth Vader</span>
+                    </div>
+                    <div class="passo">
+                        <span class="numero">2</span>
+                        <span>Veja a dashboard se mover em tempo real</span>
+                    </div>
+                    <div class="passo">
+                        <span class="numero">3</span>
+                        <span>Compare suas respostas com as de outros fãs</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="formulario">
+            <div class="cartaoFormulario">
+                <div class="formularioCabecalho">
+                    <h2>Entrar</h2>
+                    <p>Use seu e-mail e sua senha para acessar.</p>
+                </div>
+                <div class="campo">
+                    <label for="ipt_email">E-mail</label>
+                    <input id="ipt_email" type="email" placeholder="seuemail@exemplo.com">
+                </div>
+                <div class="campo">
+                    <label for="ipt_senha">Senha</label>
+                    <input id="ipt_senha" type="password" placeholder="••••••••">
+                </div>
+                <button class="botao">Entrar</button>
+                <span class="alternar">
+                    Ainda não tem conta? <a href="../dashboard/cadastro.html">Cadastre-se</a>
+                </span>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function login() {
+            window.location = "../dashboard/login.html";
+        }
+        function cadastrar() {
+            window.location = "../dashboard/cadastro.html";
+        }
+    </script>
 </body>
+
 </html>
