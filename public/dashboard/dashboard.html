@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontes.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <title>Dashboard | Anakin // Vader</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="titulo">
+                <h2>Anakin <span>//</span> Vader</h2>
+            </div>
+            <div class="navegacao">
+                <div class="link">
+                    <a href="../site/inicio.html">Início</a>
+                </div>
+                <div class="link">
+                    <a href="../dashboard/quiz.html">Quiz</a>
+                </div>
+                <div class="link">
+                    <a class="ativo" href="../dashboard/dashboard.html">Dashboard</a>
+                </div>
+            </div>
+            <div class="usuario">
+                <div class="perfil">
+                    <div class="avatar">N</div>
+                    <span id="nomeUsuario">Olá, Nome</span>
+                </div>
+                <div class="linkLogCad">
+                    <button onclick="sair()">Sair</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cabecalho">
+            <div class="cabecalhoTopo">
+                <span class="tag">Dashboard</span>
+            </div>
+            <h1>A galáxia <span>responde</span></h1>
+            <div class="barra"></div>
+            <p>
+                Resultados do quiz em tempo real. O seu desempenho aparece ao lado do de todos os fãs.
+            </p>
+        </section>
+
+        <section class="resumo">
+            <div class="kpi">
+                <span class="kpiRotulo">Participantes</span>
+                <strong class="kpiValor" id="kpiParticipantes">0</strong>
+            </div>
+            <div class="kpi">
+                <span class="kpiRotulo">Média de acertos</span>
+                <strong class="kpiValor" id="kpiMedia">0,0 de 5</strong>
+            </div>
+            <div class="kpi destaque">
+                <span class="kpiRotulo">Seus acertos</span>
+                <strong class="kpiValor" id="kpiSeusAcertos">0 de 5</strong>
+            </div>
+        </section>
+
+        <section class="graficos">
+            <article class="cartaoGrafico graficoPequeno">
+                <div class="graficoCabecalho">
+                    <h2>Anakin vs. Darth Vader</h2>
+                    <p>Percentual de acerto nas perguntas de cada um</p>
+                </div>
+                <div class="espacoGrafico"></div>
+            </article>
+
+            <article class="cartaoGrafico graficoGrande">
+                <div class="graficoCabecalho">
+                    <h2>Acertos por pergunta</h2>
+                    <p>Percentual de fãs que acertou cada pergunta, ao lado do seu resultado</p>
+                </div>
+                <div class="espacoGrafico"></div>
+            </article>
+        </section>
+
+        <section class="refazer">
+            <p>Quer mudar as suas respostas?</p>
+            <a class="botao" href="../dashboard/quiz.html">Refazer o quiz</a>
+        </section>
+    </main>
+
+    <script>
+        function sair() {
+            window.location = "../site/inicio.html";
+        }
+    </script>
+</body>
+
+</html>
