@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/fontes.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/quiz.css">
+    <title>Quiz | Anakin // Vader</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="titulo">
+                <h2>Anakin <span>//</span> Vader</h2>
+            </div>
+            <div class="navegacao">
+                <div class="link">
+                    <a href="../site/inicio.html">Início</a>
+                </div>
+                <div class="link">
+                    <a class="ativo" href="../dashboard/quiz.html">Quiz</a>
+                </div>
+                <div class="link">
+                    <a href="../dashboard/dashboard.html">Dashboard</a>
+                </div>
+            </div>
+            <div class="usuario">
+                <div class="perfil">
+                    <div class="avatar">N</div>
+                    <span id="nomeUsuario">Olá, Nome</span>
+                </div>
+                <div class="linkLogCad">
+                    <button onclick="sair()">Sair</button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="cabecalho">
+            <span class="tag">Quiz</span>
+            <h1>
+                Quanto você sabe sobre <span class="azul">Anakin</span> e <span class="vermelho">Darth Vader</span>?
+            </h1>
+            <div class="barra"></div>
+            <p>
+                Responda às 5 perguntas, sendo 2 sobre Anakin e 3 sobre Darth Vader. O seu resultado
+                aparece na dashboard, ao lado dos outros fãs.
+            </p>
+        </section>
+
+        <section class="perguntas">
+            <article class="pergunta anakin">
+                <div class="perguntaTopo">
+                    <span class="categoria">Sobre o Anakin</span>
+                    <span class="contador">Pergunta 1 de 5</span>
+                </div>
+                <h2>O que diz a profecia Jedi sobre Anakin?</h2>
+                <div class="respostas">
+                    <label class="resposta">
+                        <input type="radio" name="pergunta1" value="A">
+                        <span class="letra">A</span>
+                        <span class="textoResposta">Ele seria o líder do Conselho Jedi</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta1" value="B">
+                        <span class="letra">B</span>
+                        <span class="textoResposta">Ele seria o Escolhido que traria equilíbrio à Força</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta1" value="C">
+                        <span class="letra">C</span>
+                        <span class="textoResposta">Ele governaria a República</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta1" value="D">
+                        <span class="letra">D</span>
+                        <span class="textoResposta">Ele derrotaria o Império sozinho</span>
+                    </label>
+                </div>
+            </article>
+
+            <article class="pergunta anakin">
+                <div class="perguntaTopo">
+                    <span class="categoria">Sobre o Anakin</span>
+                    <span class="contador">Pergunta 2 de 5</span>
+                </div>
+                <h2>Contra quem Anakin perde o braço direito em Ataque dos Clones?</h2>
+                <div class="respostas">
+                    <label class="resposta">
+                        <input type="radio" name="pergunta2" value="A">
+                        <span class="letra">A</span>
+                        <span class="textoResposta">Darth Maul</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta2" value="B">
+                        <span class="letra">B</span>
+                        <span class="textoResposta">Jango Fett</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta2" value="C">
+                        <span class="letra">C</span>
+                        <span class="textoResposta">Conde Dookan</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta2" value="D">
+                        <span class="letra">D</span>
+                        <span class="textoResposta">General Grievous</span>
+                    </label>
+                </div>
+            </article>
+
+            <article class="pergunta vader">
+                <div class="perguntaTopo">
+                    <span class="categoria">Sobre o Darth Vader</span>
+                    <span class="contador">Pergunta 3 de 5</span>
+                </div>
+                <h2>Em que filme Vader revela a Luke que é seu pai?</h2>
+                <div class="respostas">
+                    <label class="resposta">
+                        <input type="radio" name="pergunta3" value="A">
+                        <span class="letra">A</span>
+                        <span class="textoResposta">Uma Nova Esperança</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta3" value="B">
+                        <span class="letra">B</span>
+                        <span class="textoResposta">O Império Contra-Ataca</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta3" value="C">
+                        <span class="letra">C</span>
+                        <span class="textoResposta">O Retorno de Jedi</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta3" value="D">
+                        <span class="letra">D</span>
+                        <span class="textoResposta">A Vingança dos Sith</span>
+                    </label>
+                </div>
+            </article>
+
+            <article class="pergunta vader">
+                <div class="perguntaTopo">
+                    <span class="categoria">Sobre o Darth Vader</span>
+                    <span class="contador">Pergunta 4 de 5</span>
+                </div>
+                <h2>O que faz Vader se voltar contra o Imperador em O Retorno de Jedi?</h2>
+                <div class="respostas">
+                    <label class="resposta">
+                        <input type="radio" name="pergunta4" value="A">
+                        <span class="letra">A</span>
+                        <span class="textoResposta">Uma ordem da Aliança Rebelde</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta4" value="B">
+                        <span class="letra">B</span>
+                        <span class="textoResposta">A destruição da segunda Estrela da Morte</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta4" value="C">
+                        <span class="letra">C</span>
+                        <span class="textoResposta">A morte de Leia</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta4" value="D">
+                        <span class="letra">D</span>
+                        <span class="textoResposta">Ver Luke sendo torturado pelo Imperador</span>
+                    </label>
+                </div>
+            </article>
+
+            <article class="pergunta vader">
+                <div class="perguntaTopo">
+                    <span class="categoria">Sobre o Darth Vader</span>
+                    <span class="contador">Pergunta 5 de 5</span>
+                </div>
+                <h2>Quem são os filhos de Darth Vader?</h2>
+                <div class="respostas">
+                    <label class="resposta">
+                        <input type="radio" name="pergunta5" value="A">
+                        <span class="letra">A</span>
+                        <span class="textoResposta">Luke e Han</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta5" value="B">
+                        <span class="letra">B</span>
+                        <span class="textoResposta">Leia e Han</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta5" value="C">
+                        <span class="letra">C</span>
+                        <span class="textoResposta">Luke e Leia</span>
+                    </label>
+                    <label class="resposta">
+                        <input type="radio" name="pergunta5" value="D">
+                        <span class="letra">D</span>
+                        <span class="textoResposta">Luke e Lando</span>
+                    </label>
+                </div>
+            </article>
+        </section>
+
+        <section class="acoes">
+            <a class="botao" href="../dashboard/dashboard.html">Enviar respostas</a>
+            <p>Você pode refazer o quiz quando quiser.</p>
+        </section>
+    </main>
+
+    <script>
+        function sair() {
+            window.location = "../site/inicio.html";
+        }
+    </script>
+</body>
+
+</html>
