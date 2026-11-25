@@ -4,8 +4,8 @@ USE anakin_vader;
 
 CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(50),
-    email VARCHAR(50),
+    nome VARCHAR(100),
+    email VARCHAR(100),
     senha VARCHAR(50)
 );
 
