@@ -91,7 +91,8 @@
                     <label for="ipt_confirmacao">Confirmar senha</label>
                     <input id="ipt_confirmacao" type="password" placeholder="Repita a senha">
                 </div>
-                <button class="botao">Criar conta</button>
+                <span class="mensagemErro" id="mensagemErro"></span>
+                <button class="botao" onclick="criarConta()">Criar conta</button>
                 <span class="alternar">
                     Já tem conta? <a href="../dashboard/login.html">Entrar</a>
                 </span>
@@ -105,6 +106,65 @@
         }
         function cadastrar() {
             window.location = "../dashboard/cadastro.html";
+        }
+
+        function mostrarErro(texto) {
+            mensagemErro.textContent = texto;
+            mensagemErro.style.display = "block";
+        }
+
+        function criarConta() {
+            var nomeVar = ipt_nome.value;
+            var emailVar = ipt_email.value;
+            var senhaVar = ipt_senha.value;
+            var confirmacaoVar = ipt_confirmacao.value;
+
+            mensagemErro.style.display = "none";
+
+            if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoVar == "") {
+                mostrarErro("Preencha todos os campos.");
+                return false;
+            } else if (nomeVar.length > 50 || emailVar.length > 50 || senhaVar.length > 50) {
+                mostrarErro("Nome, e-mail e senha aceitam até 50 caracteres.");
+                return false;
+            } else if (emailVar.indexOf("@") == -1 || emailVar.indexOf(".") == -1) {
+                mostrarErro("Digite um e-mail válido.");
+                return false;
+            } else if (senhaVar.length < 6) {
+                mostrarErro("A senha precisa ter pelo menos 6 caracteres.");
+                return false;
+            } else if (senhaVar != confirmacaoVar) {
+                mostrarErro("As senhas não são iguais.");
+                return false;
+            }
+
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    window.location = "../dashboard/login.html";
+                } else {
+                    resposta.text().then(function (texto) {
+                        console.error(texto);
+                        mostrarErro(texto);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+                mostrarErro("Não foi possível falar com o servidor. Tente novamente.");
+            });
+
+            return false;
         }
     </script>
 </body>
