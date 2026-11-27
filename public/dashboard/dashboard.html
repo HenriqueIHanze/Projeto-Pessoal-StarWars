@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../css/fontes.css">
     <link rel="stylesheet" href="../css/nav.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Dashboard | Anakin // Vader</title>
 </head>
 
-<body>
+<body onload="validarSessao(); obterDadosGrafico()">
     <header>
         <nav>
             <div class="titulo">
@@ -30,11 +31,11 @@
             </div>
             <div class="usuario">
                 <div class="perfil">
-                    <div class="avatar">N</div>
+                    <div class="avatar" id="avatarUsuario">N</div>
                     <span id="nomeUsuario">Olá, Nome</span>
                 </div>
                 <div class="linkLogCad">
-                    <button onclick="sair()">Sair</button>
+                    <button onclick="limparSessao()">Sair</button>
                 </div>
             </div>
         </nav>
@@ -73,7 +74,9 @@
                     <h2>Anakin vs. Darth Vader</h2>
                     <p>Percentual de acerto nas perguntas de cada um</p>
                 </div>
-                <div class="espacoGrafico"></div>
+                <div class="espacoGrafico">
+                    <canvas id="graficoAnakinVader"></canvas>
+                </div>
             </article>
 
             <article class="cartaoGrafico graficoGrande">
@@ -81,7 +84,9 @@
                     <h2>Acertos por pergunta</h2>
                     <p>Percentual de fãs que acertou cada pergunta, ao lado do seu resultado</p>
                 </div>
-                <div class="espacoGrafico"></div>
+                <div class="espacoGrafico">
+                    <canvas id="graficoPerguntas"></canvas>
+                </div>
             </article>
         </section>
 
@@ -91,9 +96,185 @@
         </section>
     </main>
 
+    <script src="../js/sessao.js"></script>
     <script>
-        function sair() {
-            window.location = "../site/inicio.html";
+        var idUsuario = sessionStorage.ID_USUARIO;
+        var proximaAtualizacao;
+
+        Chart.defaults.color = "#cccccc";
+
+        // busca os dados no backend pela primeira vez e chama a função que desenha os gráficos
+        function obterDadosGrafico() {
+
+            // sem usuário na sessão, validarSessao() já manda para o login
+            if (idUsuario == undefined) {
+                return;
+            }
+
+            if (proximaAtualizacao != undefined) {
+                clearTimeout(proximaAtualizacao);
+            }
+
+            fetch(`/resultados/acertos-por-pergunta/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (respostaPerguntas) {
+
+                        fetch(`/resultados/anakin-vs-vader/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                            if (response.ok) {
+                                response.json().then(function (respostaCategorias) {
+                                    console.log(`Dados recebidos: ${JSON.stringify(respostaPerguntas)}`);
+                                    console.log(`Dados recebidos: ${JSON.stringify(respostaCategorias)}`);
+
+                                    plotarGrafico(respostaPerguntas, respostaCategorias);
+                                });
+                            } else {
+                                console.error('Nenhum dado encontrado ou erro na API');
+                            }
+                        });
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            }).catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            atualizarKpis();
+        }
+
+        // monta a estrutura dos dois gráficos e os desenha na tela
+        function plotarGrafico(respostaPerguntas, respostaCategorias) {
+
+            console.log('iniciando plotagem dos gráficos...');
+
+            // gráfico 1: acertos por pergunta
+            let labelsPerguntas = [];
+
+            let dadosPerguntas = {
+                labels: labelsPerguntas,
+                datasets: [
+                    {
+                        label: 'Fãs que acertaram (%)',
+                        data: [],
+                        backgroundColor: 'rgb(255, 214, 0)'
+                    },
+                    {
+                        label: 'Você (100 = acertou)',
+                        data: [],
+                        backgroundColor: 'rgb(43, 140, 255)'
+                    }
+                ]
+            };
+
+            for (i = 0; i < respostaPerguntas.length; i++) {
+                var registro = respostaPerguntas[i];
+                labelsPerguntas.push(registro.resumo);
+                dadosPerguntas.datasets[0].data.push(registro.percentual);
+                dadosPerguntas.datasets[1].data.push(registro.voce_acertou * 100);
+            }
+
+            // gráfico 2: Anakin vs. Darth Vader
+            let labelsCategorias = [];
+
+            let dadosCategorias = {
+                labels: labelsCategorias,
+                datasets: [
+                    {
+                        label: 'Fãs (%)',
+                        data: [],
+                        backgroundColor: 'rgb(255, 214, 0)'
+                    },
+                    {
+                        label: 'Você (%)',
+                        data: [],
+                        backgroundColor: 'rgb(255, 43, 43)'
+                    }
+                ]
+            };
+
+            for (i = 0; i < respostaCategorias.length; i++) {
+                var registro = respostaCategorias[i];
+                labelsCategorias.push(registro.categoria);
+                dadosCategorias.datasets[0].data.push(registro.percentual);
+                dadosCategorias.datasets[1].data.push(registro.seus_acertos / registro.total_perguntas * 100);
+            }
+
+            const opcoes = {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            };
+
+            let graficoPerguntas = new Chart(
+                document.getElementById('graficoPerguntas'),
+                { type: 'bar', data: dadosPerguntas, options: opcoes }
+            );
+
+            let graficoCategorias = new Chart(
+                document.getElementById('graficoAnakinVader'),
+                { type: 'bar', data: dadosCategorias, options: opcoes }
+            );
+
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(dadosPerguntas, graficoPerguntas, dadosCategorias, graficoCategorias), 2000);
+        }
+
+        // busca de novo os dados a cada 2 segundos e atualiza os gráficos sem recarregar a página
+        function atualizarGrafico(dadosPerguntas, graficoPerguntas, dadosCategorias, graficoCategorias) {
+
+            fetch(`/resultados/acertos-por-pergunta/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (novosPerguntas) {
+
+                        for (i = 0; i < novosPerguntas.length; i++) {
+                            dadosPerguntas.datasets[0].data[i] = novosPerguntas[i].percentual;
+                            dadosPerguntas.datasets[1].data[i] = novosPerguntas[i].voce_acertou * 100;
+                        }
+
+                        graficoPerguntas.update();
+                    });
+                }
+            }).catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            fetch(`/resultados/anakin-vs-vader/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (novosCategorias) {
+
+                        for (i = 0; i < novosCategorias.length; i++) {
+                            dadosCategorias.datasets[0].data[i] = novosCategorias[i].percentual;
+                            dadosCategorias.datasets[1].data[i] = novosCategorias[i].seus_acertos / novosCategorias[i].total_perguntas * 100;
+                        }
+
+                        graficoCategorias.update();
+                    });
+                }
+            }).catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+            atualizarKpis();
+
+            // Altere aqui o valor em ms se quiser que os gráficos atualizem mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(dadosPerguntas, graficoPerguntas, dadosCategorias, graficoCategorias), 2000);
+        }
+
+        // atualiza os três números do topo da dashboard
+        function atualizarKpis() {
+            fetch(`/resultados/resumo/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (resposta) {
+                        kpiParticipantes.innerHTML = resposta[0].participantes;
+                        kpiMedia.innerHTML = String(resposta[0].media_acertos).replace(".", ",") + " de 5";
+                        kpiSeusAcertos.innerHTML = resposta[0].seus_acertos + " de 5";
+                    });
+                }
+            }).catch(function (error) {
+                console.error(`Erro ao atualizar os KPIs: ${error.message}`);
+            });
         }
     </script>
 </body>
