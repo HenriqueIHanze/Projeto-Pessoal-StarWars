@@ -42,12 +42,12 @@ function autenticar(req, res) {
 }
 
 function cadastrar(req, res) {
-    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    // Recupera os valores enviados pelo cadastro.html
     var nome = req.body.nomeServer;
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
 
-    // Faça as validações dos valores
+    // Valida os valores
     if (nome == undefined) {
         res.status(400).send("Seu nome está undefined!");
     } else if (email == undefined) {
@@ -56,31 +56,11 @@ function cadastrar(req, res) {
         res.status(400).send("Sua senha está undefined!");
     } else {
 
-        // Antes de cadastrar, confere se já existe uma conta com esse email
-        usuarioModel.buscarPorEmail(email)
+        // Passa os valores como parâmetro e vai para o arquivo usuarioModel.js
+        usuarioModel.cadastrar(nome, email, senha)
             .then(
-                function (resultadoBusca) {
-                    if (resultadoBusca.length > 0) {
-                        res.status(409).send("Já existe uma conta com esse email");
-                    } else {
-
-                        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-                        usuarioModel.cadastrar(nome, email, senha)
-                            .then(
-                                function (resultado) {
-                                    res.json(resultado);
-                                }
-                            ).catch(
-                                function (erro) {
-                                    console.log(erro);
-                                    console.log(
-                                        "\nHouve um erro ao realizar o cadastro! Erro: ",
-                                        erro.sqlMessage
-                                    );
-                                    res.status(500).json(erro.sqlMessage);
-                                }
-                            );
-                    }
+                function (resultado) {
+                    res.json(resultado);
                 }
             ).catch(
                 function (erro) {
@@ -89,7 +69,13 @@ function cadastrar(req, res) {
                         "\nHouve um erro ao realizar o cadastro! Erro: ",
                         erro.sqlMessage
                     );
-                    res.status(500).json(erro.sqlMessage);
+
+                    // 1062 = erro do MySQL para valor repetido em coluna UNIQUE (email)
+                    if (erro.errno == 1062) {
+                        res.status(409).send("Já existe uma conta com esse email");
+                    } else {
+                        res.status(500).json(erro.sqlMessage);
+                    }
                 }
             );
     }

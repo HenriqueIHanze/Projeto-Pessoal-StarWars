@@ -4,33 +4,21 @@ function responder(req, res) {
     var idUsuario = req.body.idUsuarioServer;
     var respostas = req.body.respostasServer;
 
-    var respostasValidas = true;
-
-    if (Array.isArray(respostas)) {
-        for (var i = 0; i < respostas.length; i++) {
-            if (respostas[i] == undefined
-                || isNaN(Number(respostas[i].idPergunta))
-                || typeof respostas[i].letra != "string"
-                || "ABCD".indexOf(respostas[i].letra) == -1
-                || respostas[i].letra.length != 1) {
-                respostasValidas = false;
-            }
-        }
-    }
-
-    if (idUsuario == undefined) {
-        res.status(400).send("Seu idUsuario está undefined!");
-    } else if (isNaN(Number(idUsuario))) {
-        res.status(400).send("Seu idUsuario é inválido!");
-    } else if (respostas == undefined) {
-        res.status(400).send("Suas respostas estão undefined!");
-    } else if (!Array.isArray(respostas) || respostas.length != 5) {
+    if (idUsuario == undefined || isNaN(Number(idUsuario))) {
+        res.status(400).send("Seu idUsuario está inválido!");
+    } else if (respostas == undefined || respostas.length != 5) {
         res.status(400).send("Envie as respostas das 5 perguntas!");
-    } else if (!respostasValidas) {
-        res.status(400).send("Suas respostas estão inválidas!");
     } else {
 
-        quizModel.responder(Number(idUsuario), respostas)
+        // confere as 5 respostas: o id da pergunta precisa ser número e a letra precisa ser A, B, C ou D
+        for (var i = 0; i < respostas.length; i++) {
+            if (isNaN(Number(respostas[i].idPergunta)) || "ABCD".indexOf(respostas[i].letra) == -1) {
+                res.status(400).send("Suas respostas estão inválidas!");
+                return;
+            }
+        }
+
+        quizModel.responder(idUsuario, respostas)
             .then(
                 function (resultado) {
                     res.json(resultado);
