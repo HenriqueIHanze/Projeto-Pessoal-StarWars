@@ -11,7 +11,7 @@
     <title>Quiz | Anakin // Vader</title>
 </head>
 
-<body>
+<body onload="validarSessao()">
     <header>
         <nav>
             <div class="titulo">
@@ -30,11 +30,11 @@
             </div>
             <div class="usuario">
                 <div class="perfil">
-                    <div class="avatar">N</div>
+                    <div class="avatar" id="avatarUsuario">N</div>
                     <span id="nomeUsuario">Olá, Nome</span>
                 </div>
                 <div class="linkLogCad">
-                    <button onclick="sair()">Sair</button>
+                    <button onclick="limparSessao()">Sair</button>
                 </div>
             </div>
         </nav>
@@ -206,14 +206,62 @@
         </section>
 
         <section class="acoes">
-            <a class="botao" href="../dashboard/dashboard.html">Enviar respostas</a>
+            <span id="mensagemErro" class="mensagemErro"></span>
+            <button class="botao" onclick="enviar()">Enviar respostas</button>
             <p>Você pode refazer o quiz quando quiser.</p>
         </section>
     </main>
 
+    <script src="../js/sessao.js"></script>
     <script>
-        function sair() {
-            window.location = "../site/inicio.html";
+        function mostrarErro(texto) {
+            mensagemErro.textContent = texto;
+            mensagemErro.style.display = "block";
+        }
+
+        function enviar() {
+            var respostasVar = [];
+
+            mensagemErro.style.display = "none";
+
+            for (var i = 1; i <= 5; i++) {
+                var marcada = document.querySelector('input[name="pergunta' + i + '"]:checked');
+
+                if (marcada == null) {
+                    mostrarErro("Responda todas as 5 perguntas antes de enviar.");
+                    return false;
+                }
+
+                respostasVar.push({
+                    idPergunta: i,
+                    letra: marcada.value
+                });
+            }
+
+            fetch("/quiz/responder", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    idUsuarioServer: sessionStorage.ID_USUARIO,
+                    respostasServer: respostasVar
+                })
+            }).then(function (resposta) {
+                if (resposta.ok) {
+                    window.location = "../dashboard/dashboard.html";
+                } else {
+                    resposta.text().then(function (texto) {
+                        console.error(texto);
+                        mostrarErro(texto);
+                    });
+                }
+            }).catch(function (erro) {
+                console.log(erro);
+                mostrarErro("Não foi possível falar com o servidor. Tente novamente.");
+            });
+
+            return false;
         }
     </script>
 </body>
